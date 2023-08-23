@@ -5,9 +5,8 @@ import '../environment_config.dart';
 import 'movie.dart';
 import 'movies_exception.dart';
 
-final movieServiceProvider = Provider<MovieService>((ref) {
-  final config = ref.watch(environmentConfigProvider);
-
+final movieServiceProvider = FutureProvider<MovieService>((ref) async {
+  final config = await ref.watch(environmentConfigProvider.future);
   return MovieService(config, Dio());
 });
 

@@ -9,10 +9,9 @@ import 'movies_exception.dart';
 
 final moviesFutureProvider =
     FutureProvider.autoDispose<List<Movie>>((ref) async {
-  // ignore: deprecated_member_use
   ref.maintainState = true;
 
-  final movieService = ref.watch(movieServiceProvider);
+  final movieService = await ref.watch(movieServiceProvider.future);
   final movies = await movieService.getMovies();
   return movies;
 });
